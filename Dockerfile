@@ -31,6 +31,9 @@ RUN echo http://dl-cdn.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories
             | awk 'system("[ -e /usr/local/lib/" $1 " ]") == 0 { next } { print "so:" $1 }' \
         ) \
         openssl \
+        shadow \
+        su-exec \
+        tzdata \
     && apk del --no-cache .build-deps \
     && rm -rf /usr/src \
     && sed -i '6i openssl_conf=openssl_def' /etc/ssl/openssl.cnf \
@@ -46,7 +49,6 @@ RUN echo http://dl-cdn.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories
     && echo "# Engine gost section" >> /etc/ssl/openssl.cnf \
     && echo "[gost_section]" >> /etc/ssl/openssl.cnf \
     && echo "engine_id = gost" >> /etc/ssl/openssl.cnf \
-#    && echo "dynamic_path = /usr/local/ssl/lib/engines-1.1/gost.so" >> /etc/ssl/openssl.cnf \
     && echo "default_algorithms = ALL" >> /etc/ssl/openssl.cnf \
     && echo "CRYPT_PARAMS = id-Gost28147-89-CryptoPro-A-ParamSet" >> /etc/ssl/openssl.cnf
 
