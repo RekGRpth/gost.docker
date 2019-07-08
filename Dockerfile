@@ -13,6 +13,7 @@ RUN echo http://dl-cdn.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories
         cmake \
         findutils \
         gcc \
+        gettext-dev \
         git \
         make \
         musl-dev \
@@ -20,7 +21,12 @@ RUN echo http://dl-cdn.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories
     && mkdir -p /usr/src \
     && cd /usr/src \
     && git clone --recursive https://github.com/RekGRpth/engine.git \
+    && git clone --recursive https://github.com/RekGRpth/musl-locales.git \
     && cd /usr/src/engine \
+    && cmake . \
+    && make -j"$(nproc)" \
+    && make -j"$(nproc)" install \
+    && cd /usr/src/musl-locales \
     && cmake . \
     && make -j"$(nproc)" \
     && make -j"$(nproc)" install \
