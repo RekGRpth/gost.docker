@@ -9,11 +9,14 @@ RUN echo http://dl-cdn.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories
     && apk upgrade --no-cache \
     && apk add --no-cache \
         ca-certificates \
+        openssl \
+        shadow \
+        su-exec \
+        tzdata \
     && apk add --no-cache --virtual .build-deps \
         cmake \
         findutils \
         gcc \
-        gettext-dev \
         git \
         make \
         musl-dev \
@@ -21,15 +24,8 @@ RUN echo http://dl-cdn.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories
     && mkdir -p /usr/src \
     && cd /usr/src \
     && git clone --recursive https://github.com/RekGRpth/engine.git \
-    && git clone --recursive https://github.com/RekGRpth/musl-locales.git \
     && cd /usr/src/engine \
-    && cmake . \
-    && make -j"$(nproc)" \
-    && make -j"$(nproc)" install \
-    && cd /usr/src/musl-locales \
-    && cmake . \
-    && make -j"$(nproc)" \
-    && make -j"$(nproc)" install \
+    && cmake . && make -j"$(nproc)" && make -j"$(nproc)" install \
     && (strip /usr/local/bin/* /usr/local/lib/*.so || true) \
     && apk add --no-cache --virtual .gost-rundeps \
         $( scanelf --needed --nobanner --format '%n#p' --recursive /usr/local \
@@ -37,10 +33,6 @@ RUN echo http://dl-cdn.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories
             | sort -u \
             | awk 'system("[ -e /usr/local/lib/" $1 " ]") == 0 { next } { print "so:" $1 }' \
         ) \
-        openssl \
-        shadow \
-        su-exec \
-        tzdata \
     && apk del --no-cache .build-deps \
     && rm -rf /usr/src \
     && sed -i '6i openssl_conf=openssl_def' /etc/ssl/openssl.cnf \
