@@ -1,7 +1,9 @@
 FROM alpine
-
 MAINTAINER RekGRpth
-
+ENV HOME=/data    
+VOLUME "${HOME}"
+WORKDIR "${HOME}"
+CMD [ "sh" ]
 RUN echo http://dl-cdn.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories \
     && echo http://dl-cdn.alpinelinux.org/alpine/edge/community >> /etc/apk/repositories \
     && echo http://dl-cdn.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories \
@@ -50,5 +52,3 @@ RUN echo http://dl-cdn.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories
     && echo "engine_id = gost" >> /etc/ssl/openssl.cnf \
     && echo "default_algorithms = ALL" >> /etc/ssl/openssl.cnf \
     && echo "CRYPT_PARAMS = id-Gost28147-89-CryptoPro-A-ParamSet" >> /etc/ssl/openssl.cnf
-
-CMD [ "sh" ]
