@@ -1,6 +1,8 @@
 FROM alpine
 MAINTAINER RekGRpth
-ENV HOME=/data    
+ENV HOME=/data \
+    LANG=ru_RU.UTF-8 \
+    TZ=Asia/Yekaterinburg
 VOLUME "${HOME}"
 WORKDIR "${HOME}"
 CMD [ "sh" ]
