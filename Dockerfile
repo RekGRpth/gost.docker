@@ -5,7 +5,6 @@ ENV HOME=/data \
     TZ=Asia/Yekaterinburg
 VOLUME "${HOME}"
 WORKDIR "${HOME}"
-CMD [ "sh" ]
 RUN echo http://dl-cdn.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories \
     && echo http://dl-cdn.alpinelinux.org/alpine/edge/community >> /etc/apk/repositories \
     && echo http://dl-cdn.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories \
