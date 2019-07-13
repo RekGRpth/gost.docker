@@ -29,13 +29,8 @@ RUN echo http://dl-cdn.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories
     && git clone --recursive https://github.com/RekGRpth/engine.git \
     && cd /usr/src/engine \
     && cmake . && make -j"$(nproc)" && make -j"$(nproc)" install \
-    && (strip /usr/local/bin/* /usr/local/lib/*.so || true) \
     && apk add --no-cache --virtual .gost-rundeps \
-        $( scanelf --needed --nobanner --format '%n#p' --recursive /usr/local \
-            | tr ',' '\n' \
-            | sort -u \
-            | awk 'system("[ -e /usr/local/lib/" $1 " ]") == 0 { next } { print "so:" $1 }' \
-        ) \
+        "$(scanelf --needed --nobanner --format '%n#p' --recursive /usr/local | tr ',' '\n' | sort -u | awk 'system("[ -e /usr/local/lib/" $1 " ]") == 0 { next } { print "so:" $1 }')" \
     && apk del --no-cache .build-deps \
     && rm -rf /usr/src \
     && sed -i '6i openssl_conf=openssl_def' /etc/ssl/openssl.cnf \
