@@ -2,7 +2,7 @@ FROM alpine
 MAINTAINER RekGRpth
 ADD entrypoint.sh /
 ENTRYPOINT [ "/entrypoint.sh" ]
-ENV HOME=/data \
+ENV HOME=/home \
     LANG=ru_RU.UTF-8 \
     TZ=Asia/Yekaterinburg
 WORKDIR "${HOME}"
