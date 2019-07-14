@@ -1,6 +1,7 @@
 FROM alpine
 MAINTAINER RekGRpth
 ADD entrypoint.sh /
+CMD [ "sh" ]
 ENTRYPOINT [ "/entrypoint.sh" ]
 ENV HOME=/home \
     LANG=ru_RU.UTF-8 \
