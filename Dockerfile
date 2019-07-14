@@ -1,22 +1,18 @@
 FROM alpine
 MAINTAINER RekGRpth
+ADD entrypoint.sh /
+ENTRYPOINT [ "/entrypoint.sh" ]
 ENV HOME=/data \
     LANG=ru_RU.UTF-8 \
     TZ=Asia/Yekaterinburg
-VOLUME "${HOME}"
 WORKDIR "${HOME}"
 RUN echo http://dl-cdn.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories \
     && echo http://dl-cdn.alpinelinux.org/alpine/edge/community >> /etc/apk/repositories \
     && echo http://dl-cdn.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories \
     && apk update --no-cache \
     && apk upgrade --no-cache \
-    && apk add --no-cache \
-        ca-certificates \
-        openssl \
-        shadow \
-        su-exec \
-        tzdata \
     && apk add --no-cache --virtual .build-deps \
+        ca-certificates \
         cmake \
         findutils \
         gcc \
@@ -30,9 +26,16 @@ RUN echo http://dl-cdn.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories
     && cd /usr/src/engine \
     && cmake . && make -j"$(nproc)" && make -j"$(nproc)" install \
     && apk add --no-cache --virtual .gost-rundeps \
+        ca-certificates \
+        openssl \
+        shadow \
+        su-exec \
+        ttf-liberation \
+        tzdata \
         $(scanelf --needed --nobanner --format '%n#p' --recursive /usr/local | tr ',' '\n' | sort -u | awk 'system("[ -e /usr/local/lib/" $1 " ]") == 0 { next } { print "so:" $1 }') \
     && apk del --no-cache .build-deps \
     && rm -rf /usr/src \
+    && chmod +x /entrypoint.sh \
     && sed -i '6i openssl_conf=openssl_def' /etc/ssl/openssl.cnf \
     && echo "" >> /etc/ssl/openssl.cnf \
     && echo "# OpenSSL default section" >> /etc/ssl/openssl.cnf \
