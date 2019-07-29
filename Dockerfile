@@ -7,7 +7,8 @@ ENV HOME=/home \
     LANG=ru_RU.UTF-8 \
     TZ=Asia/Yekaterinburg
 WORKDIR "${HOME}"
-RUN echo http://dl-cdn.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories \
+RUN set -ex \
+    && echo http://dl-cdn.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories \
     && echo http://dl-cdn.alpinelinux.org/alpine/edge/community >> /etc/apk/repositories \
     && echo http://dl-cdn.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories \
     && apk update --no-cache \
