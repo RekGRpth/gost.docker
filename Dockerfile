@@ -27,6 +27,7 @@ RUN set -ex \
     && git clone --recursive https://github.com/RekGRpth/engine.git \
     && cd /usr/src/engine \
     && cmake . && make -j"$(nproc)" install \
+    && (strip /usr/local/bin/* /usr/local/lib/*.so || true) \
     && apk add --no-cache --virtual .gost-rundeps \
         ca-certificates \
         openssl \
