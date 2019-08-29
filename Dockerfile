@@ -1,4 +1,4 @@
-FROM alpine
+FROM alpine:edge
 MAINTAINER RekGRpth
 ADD entrypoint.sh /
 CMD [ "sh" ]
@@ -8,11 +8,6 @@ ENV HOME=/home \
     TZ=Asia/Yekaterinburg
 WORKDIR "${HOME}"
 RUN set -ex \
-    && echo http://dl-cdn.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories \
-    && echo http://dl-cdn.alpinelinux.org/alpine/edge/community >> /etc/apk/repositories \
-    && echo http://dl-cdn.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories \
-    && apk update --no-cache \
-    && apk upgrade --no-cache \
     && apk add --no-cache --virtual .build-deps \
         ca-certificates \
         cmake \
