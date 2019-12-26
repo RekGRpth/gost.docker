@@ -3,9 +3,7 @@ MAINTAINER RekGRpth
 ADD entrypoint.sh /
 CMD [ "sh" ]
 ENTRYPOINT [ "/entrypoint.sh" ]
-ENV HOME=/home \
-    LANG=ru_RU.UTF-8 \
-    TZ=Asia/Yekaterinburg
+ENV HOME=/home
 WORKDIR "${HOME}"
 RUN set -ex \
     && echo http://dl-cdn.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories \
@@ -14,16 +12,21 @@ RUN set -ex \
         cmake \
         findutils \
         gcc \
+        gettext-dev \
         git \
+        libintl \
         make \
         musl-dev \
         openssl-dev \
     && mkdir -p /usr/src \
     && cd /usr/src \
     && git clone --recursive https://github.com/RekGRpth/engine.git \
+    && git clone --recursive https://github.com/RekGRpth/musl-locales.git \
+    && cd /usr/src/musl-locales \
+    && cmake . && make -j"$(nproc)" install \
     && cd /usr/src/engine \
     && cmake . && make -j"$(nproc)" install \
-    && (strip /usr/local/bin/* /usr/lib/engines*/gost.so || true) \
+    && (strip /usr/local/bin/* /usr/local/lib/*.so /usr/lib/engines*/gost.so || true) \
     && apk add --no-cache --virtual .gost-rundeps \
         ca-certificates \
         openssl \
