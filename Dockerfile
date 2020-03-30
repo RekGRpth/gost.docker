@@ -3,10 +3,12 @@ MAINTAINER RekGRpth
 ADD entrypoint.sh /
 CMD [ "sh" ]
 ENTRYPOINT [ "/entrypoint.sh" ]
-ENV HOME=/home
+ENV CFLAGS="-rdynamic -fno-omit-frame-pointer" \
+    HOME=/home
 WORKDIR "${HOME}"
 RUN set -ex \
-#    && echo http://dl-cdn.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories \
+#    && echo https://mirror.yandex.ru/mirrors/alpine/v3.11/main/ > /etc/apk/repositories \
+#    && echo https://mirror.yandex.ru/mirrors/alpine/v3.11/community/ >> /etc/apk/repositories \
     && apk add --no-cache --virtual .build-deps \
         ca-certificates \
         cmake \
@@ -21,7 +23,10 @@ RUN set -ex \
     && mkdir -p /usr/src \
     && cd /usr/src \
     && git clone --recursive https://github.com/RekGRpth/engine.git \
+    && git clone --recursive https://github.com/RekGRpth/libexecinfo.git \
     && git clone --recursive https://github.com/RekGRpth/musl-locales.git \
+    && cd /usr/src/libexecinfo \
+    && PREFIX=/usr/local make -j"$(nproc)" install \
     && cd /usr/src/musl-locales \
     && cmake . && make -j"$(nproc)" install \
     && cd /usr/src/engine \
