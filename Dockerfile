@@ -1,9 +1,9 @@
 FROM alpine
 MAINTAINER RekGRpth
-ADD entrypoint.sh /
+ADD docker_entrypoint.sh /usr/local/bin/
 ADD update_permissions.sh /usr/local/bin/
 CMD [ "sh" ]
-ENTRYPOINT [ "/entrypoint.sh" ]
+ENTRYPOINT [ "docker_entrypoint.sh" ]
 ENV CFLAGS="-rdynamic -fno-omit-frame-pointer" \
     HOME=/home
 WORKDIR "${HOME}"
@@ -42,7 +42,7 @@ RUN set -ex \
         $(scanelf --needed --nobanner --format '%n#p' --recursive /usr/local | tr ',' '\n' | sort -u | awk 'system("[ -e /usr/local/lib/" $1 " ]") == 0 { next } { print "so:" $1 }') \
     && apk del --no-cache .build-deps \
     && rm -rf /usr/src \
-    && chmod +x /entrypoint.sh \
+    && chmod +x /usr/local/bin/docker_entrypoint.sh \
     && chmod +x /usr/local/bin/update_permissions.sh \
     && sed -i '6i openssl_conf=openssl_def' /etc/ssl/openssl.cnf \
     && echo "" >> /etc/ssl/openssl.cnf \
