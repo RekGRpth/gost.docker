@@ -1,6 +1,7 @@
 FROM alpine
 MAINTAINER RekGRpth
 ADD entrypoint.sh /
+ADD update_permissions.sh /usr/local/bin/
 CMD [ "sh" ]
 ENTRYPOINT [ "/entrypoint.sh" ]
 ENV CFLAGS="-rdynamic -fno-omit-frame-pointer" \
@@ -42,6 +43,7 @@ RUN set -ex \
     && apk del --no-cache .build-deps \
     && rm -rf /usr/src \
     && chmod +x /entrypoint.sh \
+    && chmod +x /usr/local/bin/update_permissions.sh \
     && sed -i '6i openssl_conf=openssl_def' /etc/ssl/openssl.cnf \
     && echo "" >> /etc/ssl/openssl.cnf \
     && echo "# OpenSSL default section" >> /etc/ssl/openssl.cnf \
