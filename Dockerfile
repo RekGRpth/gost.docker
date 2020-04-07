@@ -5,6 +5,7 @@ ADD update_permissions.sh /usr/local/bin/
 CMD [ "sh" ]
 ENTRYPOINT [ "docker_entrypoint.sh" ]
 ENV CFLAGS="-rdynamic -fno-omit-frame-pointer" \
+    CPPFLAGS="-rdynamic -fno-omit-frame-pointer" \
     HOME=/home
 WORKDIR "${HOME}"
 RUN set -ex \
