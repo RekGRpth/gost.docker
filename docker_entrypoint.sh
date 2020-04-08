@@ -1,4 +1,4 @@
-#!/bin/sh -ex
+#!/bin/sh -e
 
 if [ "$GROUP" != "" ]; then
     if [ "$GROUP_ID" = "" ]; then GROUP_ID=$(id -g "$GROUP"); fi
