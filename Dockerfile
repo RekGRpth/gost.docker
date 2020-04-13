@@ -8,7 +8,7 @@ ENV CFLAGS="-rdynamic -fno-omit-frame-pointer" \
     CPPFLAGS="-rdynamic -fno-omit-frame-pointer" \
     HOME=/home
 WORKDIR "${HOME}"
-RUN set -ex \
+RUN set -x \
 #    && echo https://mirror.yandex.ru/mirrors/alpine/v3.11/main/ > /etc/apk/repositories \
 #    && echo https://mirror.yandex.ru/mirrors/alpine/v3.11/community/ >> /etc/apk/repositories \
     && apk add --no-cache --virtual .build-deps \
