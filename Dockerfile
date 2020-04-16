@@ -26,14 +26,16 @@ RUN set -x \
     && cd /usr/src \
     && git clone --recursive https://github.com/RekGRpth/engine.git \
     && git clone --recursive https://github.com/RekGRpth/libexecinfo.git \
-    && git clone --recursive https://github.com/RekGRpth/musl-locales.git \
+#    && git clone --recursive https://github.com/RekGRpth/musl-locales.git \
     && cd /usr/src/libexecinfo \
     && PREFIX=/usr/local make -j"$(nproc)" install \
-    && cd /usr/src/musl-locales \
-    && cmake . && make -j"$(nproc)" install \
+#    && cd /usr/src/musl-locales \
+#    && cmake . && make -j"$(nproc)" install \
     && cd /usr/src/engine \
     && cmake . && make -j"$(nproc)" install \
     && (strip /usr/local/bin/* /usr/local/lib/*.so /usr/lib/engines*/gost.so || true) \
+    && apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing --virtual .locales-rundeps \
+        musl-locales \
     && apk add --no-cache --virtual .gost-rundeps \
         ca-certificates \
         openssl \
