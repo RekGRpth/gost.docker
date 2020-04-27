@@ -60,4 +60,5 @@ RUN exec 2>&1 \
     && echo "[gost_section]" >> /etc/ssl/openssl.cnf \
     && echo "engine_id = gost" >> /etc/ssl/openssl.cnf \
     && echo "default_algorithms = ALL" >> /etc/ssl/openssl.cnf \
-    && echo "CRYPT_PARAMS = id-Gost28147-89-CryptoPro-A-ParamSet" >> /etc/ssl/openssl.cnf
+    && echo "CRYPT_PARAMS = id-Gost28147-89-CryptoPro-A-ParamSet" >> /etc/ssl/openssl.cnf \
+    && echo done
