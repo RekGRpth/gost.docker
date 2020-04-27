@@ -1,4 +1,4 @@
-#!/bin/sh -x
+#!/bin/sh -ex
 
 if [ "$GROUP" != "" ]; then
     find "$HOME" ! -group "$GROUP" -exec chgrp "$GROUP_ID" {} \;
