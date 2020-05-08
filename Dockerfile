@@ -1,6 +1,7 @@
 FROM alpine
 MAINTAINER RekGRpth
 ADD bin /usr/local/bin
+#COPY gost /usr/src/engine
 CMD [ "sh" ]
 ENTRYPOINT [ "docker_entrypoint.sh" ]
 ENV CFLAGS="-rdynamic -fno-omit-frame-pointer" \
@@ -37,6 +38,7 @@ RUN exec 2>&1 \
     && apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing --virtual .locales-rundeps \
         musl-locales \
     && apk add --no-cache --virtual .gost-rundeps \
+        busybox-extras \
         ca-certificates \
         openssl \
         shadow \
