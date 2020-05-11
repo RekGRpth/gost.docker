@@ -39,6 +39,7 @@ RUN exec 2>&1 \
         musl-locales \
     && apk add --no-cache --virtual .gost-rundeps \
         busybox-extras \
+        busybox-suid \
         ca-certificates \
         openssl \
         shadow \
