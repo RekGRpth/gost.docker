@@ -26,10 +26,10 @@ RUN exec 2>&1 \
     && mkdir -p /usr/src \
     && cd /usr/src \
     && git clone --recursive https://github.com/RekGRpth/engine.git \
-    && git clone --recursive https://github.com/RekGRpth/libexecinfo.git \
+#    && git clone --recursive https://github.com/RekGRpth/libexecinfo.git \
 #    && git clone --recursive https://github.com/RekGRpth/musl-locales.git \
-    && cd /usr/src/libexecinfo \
-    && PREFIX=/usr/local make -j"$(nproc)" install \
+#    && cd /usr/src/libexecinfo \
+#    && PREFIX=/usr/local make -j"$(nproc)" install \
 #    && cd /usr/src/musl-locales \
 #    && cmake . && make -j"$(nproc)" install \
     && cd /usr/src/engine \
