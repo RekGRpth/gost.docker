@@ -47,7 +47,7 @@ RUN exec 2>&1 \
         tzdata \
         $(scanelf --needed --nobanner --format '%n#p' --recursive /usr/local | tr ',' '\n' | sort -u | awk 'system("[ -e /usr/local/lib/" $1 " ]") == 0 { next } { print "so:" $1 }') \
     && apk del --no-cache .build-deps \
-    && rm -rf /usr/src \
+    && rm -rf /usr/src /usr/share/doc /usr/share/man /usr/local/share/doc /usr/local/share/man \
     && chmod +x /usr/local/bin/docker_entrypoint.sh /usr/local/bin/update_permissions.sh \
     && sed -i '6i openssl_conf=openssl_def' /etc/ssl/openssl.cnf \
     && echo "" >> /etc/ssl/openssl.cnf \
