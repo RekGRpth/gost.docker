@@ -35,12 +35,11 @@ RUN exec 2>&1 \
     && cd /usr/src/engine \
     && cmake . && make -j"$(nproc)" install \
     && (strip /usr/local/bin/* /usr/local/lib/*.so /usr/lib/engines*/gost.so* || true) \
-    && apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community --virtual .locales-rundeps \
-        musl-locales \
     && apk add --no-cache --virtual .gost-rundeps \
         busybox-extras \
         busybox-suid \
         ca-certificates \
+        musl-locales \
         openssl \
         shadow \
         su-exec \
