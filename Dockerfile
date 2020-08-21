@@ -33,6 +33,7 @@ RUN exec 2>&1 \
 #    && cd /usr/src/musl-locales \
 #    && cmake . && make -j"$(nproc)" install \
     && cd /usr/src/engine \
+    && git checkout openssl_1_1_1 \
     && cmake . && make -j"$(nproc)" install \
     && (strip /usr/local/bin/* /usr/local/lib/*.so /usr/lib/engines*/gost.so* || true) \
     && apk add --no-cache --virtual .gost-rundeps \
