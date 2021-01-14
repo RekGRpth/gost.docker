@@ -1,7 +1,6 @@
-FROM alpine
+FROM alpine:edge
 MAINTAINER RekGRpth
 ADD bin /usr/local/bin
-#COPY gost /usr/src/engine
 CMD [ "sh" ]
 ENTRYPOINT [ "docker_entrypoint.sh" ]
 ENV CFLAGS="-rdynamic -fno-omit-frame-pointer" \
@@ -10,8 +9,6 @@ ENV CFLAGS="-rdynamic -fno-omit-frame-pointer" \
 WORKDIR "${HOME}"
 RUN exec 2>&1 \
     && set -ex \
-#    && echo https://mirror.yandex.ru/mirrors/alpine/v3.11/main/ > /etc/apk/repositories \
-#    && echo https://mirror.yandex.ru/mirrors/alpine/v3.11/community/ >> /etc/apk/repositories \
     && apk add --no-cache --virtual .build-deps \
         ca-certificates \
         cmake \
@@ -26,12 +23,6 @@ RUN exec 2>&1 \
     && mkdir -p /usr/src \
     && cd /usr/src \
     && git clone --recursive https://github.com/RekGRpth/engine.git \
-#    && git clone --recursive https://github.com/RekGRpth/libexecinfo.git \
-#    && git clone --recursive https://github.com/RekGRpth/musl-locales.git \
-#    && cd /usr/src/libexecinfo \
-#    && PREFIX=/usr/local make -j"$(nproc)" install \
-#    && cd /usr/src/musl-locales \
-#    && cmake . && make -j"$(nproc)" install \
     && cd /usr/src/engine \
     && git checkout openssl_1_1_1 \
     && cmake . && make -j"$(nproc)" install \
