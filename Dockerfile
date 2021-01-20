@@ -1,4 +1,4 @@
-FROM alpine:edge
+FROM alpine
 MAINTAINER RekGRpth
 ADD bin /usr/local/bin
 CMD [ "sh" ]
