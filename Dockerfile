@@ -1,7 +1,6 @@
 FROM alpine:3.13
 MAINTAINER RekGRpth
 CMD [ "sh" ]
-COPY bin /usr/local/bin
 ENTRYPOINT [ "docker_entrypoint.sh" ]
 ENV CFLAGS="-rdynamic -fno-omit-frame-pointer" \
     CPPFLAGS="-rdynamic -fno-omit-frame-pointer" \
@@ -22,7 +21,10 @@ RUN set -eux; \
     ; \
     mkdir -p /usr/src; \
     cd /usr/src; \
-    git clone --recursive https://github.com/RekGRpth/engine.git; \
+    git clone https://bitbucket.org/RekGRpth/gost.git; \
+    git clone https://github.com/RekGRpth/engine.git; \
+    cd /usr/src/gost; \
+    cp -rf bin/* /usr/local/bin/; \
     cd /usr/src/engine; \
     git checkout openssl_1_1_1; \
     cmake .; \
