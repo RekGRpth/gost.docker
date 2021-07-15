@@ -43,8 +43,8 @@ RUN set -eux; \
     strip /usr/lib/engines*/gost.so*; \
     apk del --no-cache .build-deps; \
     rm -rf "${HOME}" /usr/share/doc /usr/share/man /usr/local/share/doc /usr/local/share/man; \
-    find / -name "*.a" -delete; \
-    find / -name "*.la" -delete; \
+    find / -type f -name "*.a" -delete; \
+    find / -type f -name "*.la" -delete; \
     chmod +x /usr/local/bin/docker_entrypoint.sh /usr/local/bin/update_permissions.sh; \
     sed -i '6i openssl_conf=openssl_def' /etc/ssl/openssl.cnf; \
     echo "" >> /etc/ssl/openssl.cnf; \
