@@ -18,16 +18,17 @@ RUN set -eux; \
         musl-dev \
         openssl-dev \
     ; \
-    mkdir -p /usr/src; \
-    cd /usr/src; \
+    mkdir -p "${HOME}"; \
+    cd "${HOME}"; \
     git clone https://bitbucket.org/RekGRpth/gost.git; \
     git clone https://github.com/RekGRpth/engine.git; \
-    cd /usr/src/gost; \
+    cd "${HOME}/gost"; \
     cp -rf bin/* /usr/local/bin/; \
-    cd /usr/src/engine; \
+    cd "${HOME}/engine"; \
     git checkout openssl_1_1_1; \
     cmake .; \
     make -j"$(nproc)" install; \
+    cd "${HOME}"; \
     apk add --no-cache --virtual .gost-rundeps \
         busybox-extras \
         busybox-suid \
@@ -41,7 +42,7 @@ RUN set -eux; \
     find /usr/local/bin /usr/local/lib -type f -exec strip '{}' \;; \
     strip /usr/lib/engines*/gost.so*; \
     apk del --no-cache .build-deps; \
-    rm -rf /usr/src /usr/share/doc /usr/share/man /usr/local/share/doc /usr/local/share/man; \
+    rm -rf "${HOME}" /usr/share/doc /usr/share/man /usr/local/share/doc /usr/local/share/man; \
     find / -name "*.a" -delete; \
     find / -name "*.la" -delete; \
     chmod +x /usr/local/bin/docker_entrypoint.sh /usr/local/bin/update_permissions.sh; \
