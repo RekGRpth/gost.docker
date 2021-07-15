@@ -1,6 +1,5 @@
 FROM alpine:3.13
 MAINTAINER RekGRpth
-CMD [ "sh" ]
 ENTRYPOINT [ "docker_entrypoint.sh" ]
 ENV CFLAGS="-rdynamic -fno-omit-frame-pointer" \
     CPPFLAGS="-rdynamic -fno-omit-frame-pointer" \
