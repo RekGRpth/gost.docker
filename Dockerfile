@@ -1,9 +1,8 @@
 FROM alpine:3.13
 MAINTAINER RekGRpth
 ENTRYPOINT [ "docker_entrypoint.sh" ]
-ENV CFLAGS="-rdynamic -fno-omit-frame-pointer" \
-    CPPFLAGS="-rdynamic -fno-omit-frame-pointer" \
-    HOME=/home
+ENV HOME=/home \
+    LD_PRELOAD=/usr/lib/preloadable_libiconv.so
 WORKDIR "${HOME}"
 RUN set -eux; \
     apk add --no-cache --virtual .build-deps \
@@ -33,6 +32,7 @@ RUN set -eux; \
         busybox-extras \
         busybox-suid \
         ca-certificates \
+        gnu-libiconv \
         musl-locales \
         openssl \
         shadow \
