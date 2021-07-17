@@ -1,6 +1,7 @@
 FROM alpine:3.13
 MAINTAINER RekGRpth
 ENTRYPOINT [ "docker_entrypoint.sh" ]
+ADD bin /usr/local/bin
 ENV HOME=/home \
     LD_PRELOAD=/usr/lib/preloadable_libiconv.so
 WORKDIR "${HOME}"
@@ -17,13 +18,10 @@ RUN set -eux; \
         musl-dev \
         openssl-dev \
     ; \
-    mkdir -p "${HOME}"; \
-    cd "${HOME}"; \
-    git clone https://bitbucket.org/RekGRpth/gost.git; \
+    mkdir -p "${HOME}/src"; \
+    cd "${HOME}/src"; \
     git clone https://github.com/RekGRpth/engine.git; \
-    cd "${HOME}/gost"; \
-    cp -rf bin/* /usr/local/bin/; \
-    cd "${HOME}/engine"; \
+    cd "${HOME}/src/engine"; \
     git checkout openssl_1_1_1; \
     cmake .; \
     make -j"$(nproc)" install; \
