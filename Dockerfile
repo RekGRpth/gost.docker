@@ -20,9 +20,8 @@ RUN set -eux; \
     ; \
     mkdir -p "${HOME}/src"; \
     cd "${HOME}/src"; \
-    git clone https://github.com/RekGRpth/engine.git; \
+    git clone -b openssl_1_1_1 https://github.com/RekGRpth/engine.git; \
     cd "${HOME}/src/engine"; \
-    git checkout openssl_1_1_1; \
     cmake .; \
     make -j"$(nproc)" install; \
     cd "${HOME}"; \
