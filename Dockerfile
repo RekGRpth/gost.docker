@@ -2,8 +2,7 @@ FROM alpine
 MAINTAINER RekGRpth
 ENTRYPOINT [ "docker_entrypoint.sh" ]
 ADD bin /usr/local/bin
-ENV HOME=/home \
-    LD_PRELOAD=/usr/lib/preloadable_libiconv.so
+ENV HOME=/home
 WORKDIR "${HOME}"
 RUN set -eux; \
     apk add --no-cache --virtual .build-deps \
@@ -29,7 +28,6 @@ RUN set -eux; \
         busybox-extras \
         busybox-suid \
         ca-certificates \
-        gnu-libiconv \
         musl-locales \
         openssl \
         shadow \
