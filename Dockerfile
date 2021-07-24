@@ -5,6 +5,8 @@ ADD bin /usr/local/bin
 ENV HOME=/home
 WORKDIR "${HOME}"
 RUN set -eux; \
+    apk update --no-cache; \
+    apk upgrade --no-cache; \
     apk add --no-cache --virtual .build-deps \
         ca-certificates \
         cmake \
