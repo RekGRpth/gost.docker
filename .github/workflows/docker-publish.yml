@@ -4,9 +4,12 @@ on:
 #  schedule:
 #    - cron: '32 6 * * *'
   push:
-    branches: [ master ]
+    branches:
+      - 'master'
 #    # Publish semver tags as releases.
 #    tags: [ 'v*.*.*' ]
+    tags:
+      - '*'
 #  pull_request:
 #    branches: [ master ]
 
