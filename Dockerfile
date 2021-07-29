@@ -25,7 +25,7 @@ RUN set -eux; \
     cd "${HOME}/src/engine"; \
     cmake .; \
     make -j"$(nproc)" install; \
-    cd "${HOME}"; \
+    cd /; \
     apk add --no-cache --virtual .gost-rundeps \
         busybox-extras \
         busybox-suid \
