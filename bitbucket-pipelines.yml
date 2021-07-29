@@ -4,7 +4,7 @@ pipelines:
   default:
     - parallel:
         - step:
-            name: Build and Push $BITBUCKET_REPO_SLUG
+            name: build
             script:
               - IMAGE_NAME="$BITBUCKET_REPO_SLUG"
               - echo "$DOCKERHUB_PASSWORD" | docker login --username "$DOCKERHUB_USERNAME" --password-stdin
