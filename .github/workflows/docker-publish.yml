@@ -36,6 +36,7 @@ jobs:
           echo "::set-env name=repository::$repository"
         env:
           github_repository: ${{ github.repository }}
+          ACTIONS_ALLOW_UNSECURE_COMMANDS: true
 
       # Login against a Docker registry except on PR
       # https://github.com/docker/login-action
