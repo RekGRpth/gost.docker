@@ -18,8 +18,8 @@ pipelines:
               - docker build . --file Dockerfile --tag ${IMAGE_NAME}
               - docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}
               - docker push ${IMAGE_NAME}
-#            services:
-#              - docker
+            services:
+              - docker
 #            caches:
 #              - docker
 #        - step:
