@@ -30,6 +30,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 #        uses: actions/checkout
+      - run: |
+          repository="${github_repository%.*}"
+          echo "$repository"
+          echo "::set-env name=repository::$repository"
+        env:
+          github_repository: ${{ github.repository }}
 
       # Login against a Docker registry except on PR
       # https://github.com/docker/login-action
