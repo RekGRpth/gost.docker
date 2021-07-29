@@ -30,10 +30,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 #        uses: actions/checkout
-      - run: |
-          repository="${github_repository%.*}"
-#          echo "$repository"
-          echo "::set-env name=IMAGE_NAME::$repository"
+      - run: echo "::set-env name=IMAGE_NAME::${github_repository%.*}"
         env:
           github_repository: ${{ github.repository }}
           ACTIONS_ALLOW_UNSECURE_COMMANDS: true
