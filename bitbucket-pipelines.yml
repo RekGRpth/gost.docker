@@ -6,9 +6,9 @@ pipelines:
         - step:
             name: build
             script:
-              - IMAGE_NAME="$BITBUCKET_REPO_SLUG"
-              - echo "$DOCKERHUB_PASSWORD" | docker login --username "$DOCKERHUB_USERNAME" --password-stdin
-              - docker build . --file Dockerfile --tag "$IMAGE_NAME"
-              - docker push "$IMAGE_NAME"
+              - IMAGE_NAME="${DOCKERHUB_NAMESPACE}/${BITBUCKET_REPO_SLUG}"
+              - echo "${DOCKERHUB_PASSWORD}" | docker login --username "${DOCKERHUB_USERNAME}" --password-stdin
+              - docker build . --file Dockerfile --tag "${IMAGE_NAME}"
+              - docker push "${IMAGE_NAME}"
             services:
               - docker
