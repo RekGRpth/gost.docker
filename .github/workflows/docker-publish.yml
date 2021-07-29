@@ -4,12 +4,19 @@ on:
   push:
     branches:
       - 'latest'
+  workflow_dispatch:
+  repository_dispatch:
+    types:
+      - webhook
 
 env:
   REGISTRY: docker.io
 
 jobs:
   build:
+    concurrency:
+      group: ${{ github.ref }}
+      cancel-in-progress: true
     runs-on: ubuntu-latest
     permissions:
       contents: read
