@@ -45,13 +45,13 @@ jobs:
     strategy:
       matrix:
         repo:
-          - RekGRpth/cherry.gost
-          - RekGRpth/pdf.gost
+          - RekGRpth/cherry.docker
+          - RekGRpth/pdf.docker
     runs-on: ubuntu-latest
     steps:
       - name: Repository Dispatch
         uses: peter-evans/repository-dispatch@v1
         with:
-          token: ${{ secrets.PUBLIC_REPO_ACCESS_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           repository: ${{ matrix.repo }}
           event-type: push
