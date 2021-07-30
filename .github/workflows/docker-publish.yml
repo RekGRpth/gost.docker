@@ -46,7 +46,10 @@ jobs:
       matrix:
         repo:
           - RekGRpth/cherry.docker
+          - RekGRpth/libreoffice.docker
           - RekGRpth/pdf.docker
+          - RekGRpth/pgadmin3.docker
+          - RekGRpth/pgadmin.docker
     runs-on: ubuntu-latest
     steps:
       - name: Repository Dispatch
