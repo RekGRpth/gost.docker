@@ -5,7 +5,7 @@ on:
       - latest
   repository_dispatch:
     types:
-      - push
+      - latest
 jobs:
   build:
     env:
@@ -56,4 +56,4 @@ jobs:
         with:
           token: ${{ secrets.PUBLIC_REPO_ACCESS_TOKEN }}
           repository: ${{ matrix.repo }}
-          event-type: push
+          event-type: latest
