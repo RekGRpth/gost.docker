@@ -3,11 +3,10 @@ name: Docker
 on:
   push:
     branches:
-      - 'latest'
-  workflow_dispatch:
+      - latest
   repository_dispatch:
     types:
-      - webhook
+      - push
 
 env:
   REGISTRY: ghcr.io
@@ -47,3 +46,19 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+
+  dispatch:
+    needs: build
+      strategy:
+        matrix:
+          repo:
+            - RekGRpth/pdf
+            - RekGRpth/cherry
+      runs-on: ubuntu-latest
+      steps:
+        - name: Repository Dispatch
+          uses: peter-evans/repository-dispatch@v1
+          with:
+            token: ${{ secrets.GITHUB_TOKEN }}
+            repository: ${{ matrix.repo }}
+            event-type: push
