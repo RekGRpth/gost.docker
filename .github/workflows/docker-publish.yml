@@ -6,11 +6,11 @@ on:
   repository_dispatch:
     types:
       - push
-env:
-  REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
 jobs:
   build:
+    env:
+      REGISTRY: ghcr.io
+      IMAGE_NAME: ${{ github.repository }}
     concurrency:
       group: ${{ github.ref }}
       cancel-in-progress: true
