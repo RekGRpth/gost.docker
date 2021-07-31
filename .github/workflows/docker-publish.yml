@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - latest
+  workflow_dispatch:
   repository_dispatch:
     types:
       - latest
