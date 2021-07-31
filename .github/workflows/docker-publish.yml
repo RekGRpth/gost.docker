@@ -20,6 +20,7 @@ jobs:
       contents: read
       packages: write
     steps:
+      - run: echo "{{ github.ref }} | {{ github.base_ref }} | {{ github.head_ref }}"
       - name: Checkout repository
         uses: actions/checkout@v2
       - name: Log into registry ${{ env.REGISTRY }}
