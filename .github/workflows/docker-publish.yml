@@ -42,6 +42,7 @@ jobs:
     steps:
       - uses: peter-evans/repository-dispatch@v1
         with:
+          client-payload: '{"repository": ${{ toJson(github.repository) }}}'
           event-type: latest
           repository: ${{ matrix.repo }}
           token: ${{ secrets.PUBLIC_REPO_ACCESS_TOKEN }}
