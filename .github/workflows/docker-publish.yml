@@ -18,7 +18,9 @@ jobs:
       packages: write
     runs-on: ubuntu-latest
     steps:
-      - uses: rekgrpth/build-push@v1
+      - uses: rekgrpth/git-clone-action@v1
+      - uses: rekgrpth/docker-login-action@v1
+      - uses: rekgrpth/docker-build-push-action@v1
   dispatch:
     needs: build
     runs-on: ubuntu-latest
