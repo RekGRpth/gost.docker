@@ -12,6 +12,8 @@ jobs:
     concurrency:
       cancel-in-progress: true
       group: ${{ github.ref }}
+    env:
+      GITHUB_TOKEN: ${{ github.token }}
     name: ${{ github.event.client_payload.repository }} ${{ github.event_name }} ${{ github.event.branch }}
     permissions:
       contents: read
@@ -24,12 +26,12 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - uses: rekgrpth/github-repository-dispatch-action@v1
-        with:
-          client-payload: '{"repository": ${{ toJson(github.event.repository.name) }}}'
-          event-type: latest
-          repository: ${{ github.repository_owner }}/${{ matrix.repo }}
-          token: ${{ secrets.PUBLIC_REPO_ACCESS_TOKEN }}
+      - env:
+          GITHUB_TOKEN: ${{ secrets.PUBLIC_REPO_ACCESS_TOKEN }}
+          INPUTS_CLIENT_PAYLOAD: '{"repository": ${{ toJson(github.event.repository.name) }}}'
+          INPUTS_EVENT_TYPE: latest
+          INPUTS_REPOSITORY: ${{ github.repository_owner }}/${{ matrix.repo }}
+        uses: rekgrpth/github-repository-dispatch-action@v1
     strategy:
       matrix:
         repo:
