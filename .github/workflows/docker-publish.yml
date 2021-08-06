@@ -15,23 +15,20 @@ jobs:
     env:
       GITHUB_TOKEN: ${{ github.token }}
     name: ${{ github.event.client_payload.repository }} ${{ github.event_name }} ${{ github.event.branch }}
-    permissions:
-      contents: read
-      packages: write
     runs-on: ubuntu-latest
     steps:
-      - uses: rekgrpth/git-clone-action@v1
-      - uses: rekgrpth/docker-login-build-push-action@v1
+      - uses: rekgrpth/git-clone-shell-action@v1
+      - uses: rekgrpth/docker-login-build-push-shell-action@v1
   dispatch:
     needs: build
     runs-on: ubuntu-latest
     steps:
       - env:
           GITHUB_TOKEN: ${{ secrets.PUBLIC_REPO_ACCESS_TOKEN }}
-          INPUTS_CLIENT_PAYLOAD: '"repository": ${{ toJson(github.event.repository.name) }}'
+          INPUTS_CLIENT_PAYLOAD: '{"repository":${{ toJson(github.event.repository.name) }}}'
           INPUTS_EVENT_TYPE: latest
           INPUTS_REPOSITORY: ${{ github.repository_owner }}/${{ matrix.repo }}
-        uses: rekgrpth/github-repository-dispatch-action@v1
+        uses: rekgrpth/github-repository-dispatch-shell-action@v1
     strategy:
       matrix:
         repo:
