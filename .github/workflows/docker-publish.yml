@@ -34,10 +34,13 @@ jobs:
       matrix:
         repo:
           - cherry.docker
+          - gar.docker
           - libreoffice.docker
           - pdf.docker
           - pgadmin3.docker
           - pgadmin.docker
+          - powa.docker
+          - smtp.docker
   ubuntu:
     concurrency:
       cancel-in-progress: true
