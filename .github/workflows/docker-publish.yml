@@ -8,7 +8,7 @@ on:
       - 3.14
   workflow_dispatch:
 jobs:
-  3_14:
+  b_3_14:
     concurrency:
       cancel-in-progress: true
       group: ${{ github.ref }}
@@ -21,7 +21,7 @@ jobs:
       - uses: rekgrpth/docker-login-build-push-shell-action@v1
       - uses: rekgrpth/github-publish-action-shell-action@v1
   dispatch:
-    needs: 3_14
+    needs: b_3_14
     runs-on: ubuntu-latest
     steps:
       - env:
