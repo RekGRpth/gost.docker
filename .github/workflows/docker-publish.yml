@@ -2,13 +2,13 @@ name: Docker
 on:
   push:
     branches:
-      - 3.14
+      - 3.13
   repository_dispatch:
     types:
-      - 3.14
+      - 3.13
   workflow_dispatch:
 jobs:
-  b_3_14:
+  b_3_13:
     concurrency:
       cancel-in-progress: true
       group: ${{ github.ref }}
@@ -21,13 +21,13 @@ jobs:
       - uses: rekgrpth/docker-login-build-push-shell-action@v1
       - uses: rekgrpth/github-publish-action-shell-action@v1
   dispatch:
-    needs: b_3_14
+    needs: b_3_13
     runs-on: ubuntu-latest
     steps:
       - env:
           GITHUB_TOKEN: ${{ secrets.PUBLIC_REPO_ACCESS_TOKEN }}
           INPUTS_CLIENT_PAYLOAD: '{"repository":${{ toJson(github.event.repository.name) }}}'
-          INPUTS_EVENT_TYPE: 3.14
+          INPUTS_EVENT_TYPE: 3.13
           INPUTS_REPOSITORY: ${{ github.repository_owner }}/${{ matrix.repo }}
         uses: rekgrpth/github-repository-dispatch-shell-action@v1
     strategy:
