@@ -35,8 +35,8 @@ jobs:
         repo:
           - cherry.docker
           - gar.docker
+          - lib.docker
           - libreoffice.docker
-          - pdf.docker
           - pgadmin3.docker
           - pgadmin.docker
           - powa.docker
