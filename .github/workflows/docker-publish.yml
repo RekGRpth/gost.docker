@@ -14,6 +14,7 @@ jobs:
       group: ${{ github.ref }}/latest
     env:
       GITHUB_TOKEN: ${{ github.token }}
+      INPUTS_DOCKERFILE: Dockerfile.alpine
     name: ${{ github.event.client_payload.repository }} ${{ github.event_name }} ${{ github.event.branch }}
     runs-on: ubuntu-latest
     steps:
@@ -28,6 +29,7 @@ jobs:
     env:
       DOCKER_FROM: alpine:edge
       GITHUB_TOKEN: ${{ github.token }}
+      INPUTS_DOCKERFILE: Dockerfile.alpine
       INPUTS_TAG: edge
     runs-on: ubuntu-latest
     steps:
@@ -42,6 +44,7 @@ jobs:
     env:
       DOCKER_FROM: debian:stable-slim
       GITHUB_TOKEN: ${{ github.token }}
+      INPUTS_DOCKERFILE: Dockerfile.debian
       INPUTS_TAG: debian
     runs-on: ubuntu-latest
     steps:
@@ -56,6 +59,7 @@ jobs:
     env:
       DOCKER_FROM: ubuntu:rolling
       GITHUB_TOKEN: ${{ github.token }}
+      INPUTS_DOCKERFILE: Dockerfile.debian
       INPUTS_TAG: ubuntu
     runs-on: ubuntu-latest
     steps:
