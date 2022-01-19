@@ -13,7 +13,6 @@ RUN set -eux; \
         ln -fs su-exec /sbin/gosu; \
     else \
         export DEBIAN_FRONTEND=noninteractive; \
-        export savedAptMark="$(apt-mark showmanual)"; \
     fi; \
     chmod +x /usr/local/bin/*.sh; \
     "docker_${DOCKER_BUILD}_$DOCKER_TYPE.sh"; \
