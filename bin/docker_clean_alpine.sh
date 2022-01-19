@@ -1,7 +1,7 @@
 #!/bin/sh -eux
 
 cd /
-apk add --no-cache --virtual .lib-rundeps \
+apk add --no-cache --virtual .gost-rundeps \
     busybox-extras \
     busybox-suid \
     ca-certificates \
