@@ -1,11 +1,5 @@
 ARG DOCKER_FROM=alpine:latest
-FROM "$DOCKER_FROM" AS builder
-RUN set -eux; \
-    apk update --no-cache; \
-    apk upgrade --no-cache; \
-    echo done
-FROM scratch
-COPY --from=builder . .
+FROM "$DOCKER_FROM"
 ADD bin /usr/local/bin
 ENTRYPOINT [ "docker_entrypoint.sh" ]
 ENV HOME=/home
@@ -14,6 +8,8 @@ WORKDIR "$HOME"
 RUN set -eux; \
     ln -fs su-exec /sbin/gosu; \
     chmod +x /usr/local/bin/*.sh; \
+    apk update --no-cache; \
+    apk upgrade --no-cache; \
     apk add --no-cache --virtual .build \
         ca-certificates \
         cmake \
