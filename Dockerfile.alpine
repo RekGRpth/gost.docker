@@ -10,7 +10,7 @@ ADD bin /usr/local/bin
 ENTRYPOINT [ "docker_entrypoint.sh" ]
 ENV HOME=/home
 MAINTAINER RekGRpth
-WORKDIR "${HOME}"
+WORKDIR "$HOME"
 RUN set -eux; \
     ln -fs su-exec /sbin/gosu; \
     chmod +x /usr/local/bin/*.sh; \

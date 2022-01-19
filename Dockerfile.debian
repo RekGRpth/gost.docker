@@ -11,7 +11,7 @@ ADD bin /usr/local/bin
 ENTRYPOINT [ "docker_entrypoint.sh" ]
 ENV HOME=/home
 MAINTAINER RekGRpth
-WORKDIR "${HOME}"
+WORKDIR "$HOME"
 RUN set -eux; \
     export DEBIAN_FRONTEND=noninteractive; \
     chmod +x /usr/local/bin/*.sh; \
