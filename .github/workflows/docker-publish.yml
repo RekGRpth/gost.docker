@@ -8,13 +8,14 @@ on:
       - latest
   workflow_dispatch:
 env:
+  DOCKER_FROM: alpine:${{ github.job }}
   GITHUB_TOKEN: ${{ github.token }}
+  INPUTS_TAG: ${{ github.job }}
 concurrency:
   cancel-in-progress: true
   group: ${{ github.repository }}/${{ github.job }}
 jobs:
   latest:
-    name: ${{ github.job }} ${{ github.event.client_payload.repository }} ${{ github.event_name }} ${{ github.event.branch }}
     runs-on: ubuntu-latest
     steps:
       - uses: rekgrpth/git-clone-shell-action@v1
@@ -22,9 +23,6 @@ jobs:
       - uses: rekgrpth/github-publish-action-shell-action@v1
     timeout-minutes: 20
   edge:
-    env:
-      DOCKER_FROM: alpine:edge
-      INPUTS_TAG: edge
     runs-on: ubuntu-latest
     steps:
       - uses: rekgrpth/git-clone-shell-action@v1
@@ -33,9 +31,8 @@ jobs:
     timeout-minutes: 20
   debian:
     env:
-      DOCKER_FROM: debian:stable-slim
+      DOCKER_FROM: ${{ github.job }}:stable-slim
       INPUTS_DOCKERFILE: Dockerfile.debian
-      INPUTS_TAG: debian
     runs-on: ubuntu-latest
     steps:
       - uses: rekgrpth/git-clone-shell-action@v1
@@ -44,9 +41,8 @@ jobs:
     timeout-minutes: 20
   ubuntu:
     env:
-      DOCKER_FROM: ubuntu:rolling
+      DOCKER_FROM: ${{ github.job }}:rolling
       INPUTS_DOCKERFILE: Dockerfile.debian
-      INPUTS_TAG: ubuntu
     runs-on: ubuntu-latest
     steps:
       - uses: rekgrpth/git-clone-shell-action@v1
