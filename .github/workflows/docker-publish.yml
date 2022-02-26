@@ -23,25 +23,25 @@ jobs:
       - uses: rekgrpth/git-clone-shell-action@v1
       - uses: rekgrpth/docker-login-build-push-shell-action@v1
       - uses: rekgrpth/github-publish-action-shell-action@v1
-    timeout-minutes: 20
+    timeout-minutes: 30
   debian:
     runs-on: ubuntu-latest
     steps:
       - uses: rekgrpth/git-clone-shell-action@v1
       - uses: rekgrpth/docker-login-build-push-shell-action@v1
       - uses: rekgrpth/github-publish-action-shell-action@v1
-    timeout-minutes: 20
+    timeout-minutes: 30
   ubuntu:
     runs-on: ubuntu-latest
     steps:
       - uses: rekgrpth/git-clone-shell-action@v1
       - uses: rekgrpth/docker-login-build-push-shell-action@v1
       - uses: rekgrpth/github-publish-action-shell-action@v1
-    timeout-minutes: 20
+    timeout-minutes: 30
   dispatch:
     needs:
+      - alpine
       - debian
-      - latest
       - ubuntu
     runs-on: ubuntu-latest
     steps:
