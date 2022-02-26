@@ -1,5 +1,4 @@
-ARG DOCKER_FROM=alpine:latest
-FROM "$DOCKER_FROM"
+FROM alpine:latest
 ADD bin /usr/local/bin
 ENTRYPOINT [ "docker_entrypoint.sh" ]
 ENV HOME=/home
@@ -22,8 +21,12 @@ RUN set -eux; \
         musl-dev \
         openssl-dev \
     ; \
-    docker_clone.sh; \
-    docker_build.sh; \
+    mkdir -p "$HOME/src"; \
+    cd "$HOME/src"; \
+    git clone -b openssl_1_1_1 https://github.com/RekGRpth/engine.git; \
+    cd "$HOME/src/engine"; \
+    cmake .; \
+    make -j"$(nproc)" install; \
     apk add --no-cache --virtual .gost \
         busybox-extras \
         busybox-suid \
