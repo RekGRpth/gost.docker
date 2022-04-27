@@ -21,7 +21,7 @@ RUN set -eux; \
     ; \
     mkdir -p "$HOME/src"; \
     cd "$HOME/src"; \
-    git clone -b openssl_1_1_1 https://github.com/RekGRpth/engine.git; \
+    git clone --branch master --recurse-submodules https://github.com/RekGRpth/engine.git; \
     cd "$HOME/src/engine"; \
     cmake .; \
     make -j"$(nproc)" install; \
