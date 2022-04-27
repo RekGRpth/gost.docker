@@ -1,4 +1,4 @@
-FROM debian:stable-slim
+FROM debian:latest
 ADD bin /usr/local/bin
 ENTRYPOINT [ "docker_entrypoint.sh" ]
 ENV HOME=/home
