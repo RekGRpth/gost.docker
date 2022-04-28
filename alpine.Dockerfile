@@ -19,11 +19,11 @@ RUN set -eux; \
         libintl \
         make \
         musl-dev \
-        openssl3-dev \
+        openssl-dev \
     ; \
     mkdir -p "$HOME/src"; \
     cd "$HOME/src"; \
-    git clone --branch master --recurse-submodules https://github.com/RekGRpth/engine.git; \
+    git clone --branch openssl_1_1_1 --recurse-submodules https://github.com/RekGRpth/engine.git; \
     cd "$HOME/src/engine"; \
     cmake .; \
     make -j"$(nproc)" install; \
@@ -42,7 +42,7 @@ RUN set -eux; \
     find /usr/local/lib -type f -name "*.so" -exec strip '{}' \;; \
     strip /usr/lib/engines*/gost.so*; \
     apk del --no-cache .build; \
-    docker_gost.sh /etc/ssl/openssl.cnf; \
+    docker_gost.sh /etc/ssl1.1/openssl.cnf; \
     rm -rf "$HOME" /usr/share/doc /usr/share/man /usr/local/share/doc /usr/local/share/man; \
     find /usr -type f -name "*.la" -delete; \
     echo done
