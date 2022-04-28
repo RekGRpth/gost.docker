@@ -31,7 +31,6 @@ RUN set -eux; \
         busybox-extras \
         busybox-suid \
         ca-certificates \
-        libcrypto3 \
         musl-locales \
         shadow \
         su-exec \
