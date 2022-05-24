@@ -41,7 +41,7 @@ RUN set -eux; \
     find /usr/local/lib -type f -name "*.so" -exec strip '{}' \;; \
     strip /usr/lib/engines*/gost.so*; \
     apk del --no-cache .build; \
-    docker_gost.sh /etc/ssl1.1/openssl.cnf; \
+    docker_gost.sh /etc/ssl/openssl.cnf; \
     rm -rf "$HOME" /usr/share/doc /usr/share/man /usr/local/share/doc /usr/local/share/man; \
     find /usr -type f -name "*.la" -delete; \
     echo done
