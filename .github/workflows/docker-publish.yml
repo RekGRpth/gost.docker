@@ -47,6 +47,7 @@ jobs:
     timeout-minutes: 30
   dispatch:
     needs:
+      - alpine_3_15
       - alpine
       - debian
       - ubuntu
