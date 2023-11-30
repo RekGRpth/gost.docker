@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM alpine:3.17
 ADD bin /usr/local/bin
 ENTRYPOINT [ "docker_entrypoint.sh" ]
 ENV HOME=/home
