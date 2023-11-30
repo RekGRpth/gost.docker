@@ -24,6 +24,13 @@ jobs:
       - uses: rekgrpth/docker-login-build-push-shell-action@v1
       - uses: rekgrpth/github-publish-action-shell-action@v1
     timeout-minutes: 30
+  alpine_1_1_1:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: rekgrpth/git-clone-shell-action@v1
+      - uses: rekgrpth/docker-login-build-push-shell-action@v1
+      - uses: rekgrpth/github-publish-action-shell-action@v1
+    timeout-minutes: 30
   alpine_3_15:
     runs-on: ubuntu-latest
     steps:
@@ -64,6 +71,7 @@ jobs:
       - alpine_3_17
       - alpine_3_16
       - alpine_3_15
+      - alpine_1_1_1
       - alpine
       - debian
       - ubuntu
