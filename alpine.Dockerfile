@@ -19,13 +19,14 @@ RUN set -eux; \
         libintl \
         make \
         musl-dev \
+        openssl \
         openssl-dev \
     ; \
     mkdir -p "$HOME/src"; \
     cd "$HOME/src"; \
     git clone --branch master --recurse-submodules https://github.com/RekGRpth/engine.git; \
     cd "$HOME/src/engine"; \
-    cmake .; \
+    cmake -DCMAKE_INSTALL_PREFIX=/usr .; \
     make -j"$(nproc)" install; \
     apk add --no-cache --virtual .gost \
         busybox-extras \
