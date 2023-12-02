@@ -1,5 +1,7 @@
 #!/bin/sh -eux
 
+sed -i '/\[openssl_init\]/ a engines = engine_section' "$1"
+
 sed -i '6i openssl_conf=openssl_def' "$1"
 cat >>"$1" <<EOF
 
