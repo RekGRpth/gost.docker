@@ -35,7 +35,6 @@ RUN set -eux; \
         ! grep -q '/usr/share/locale' /etc/dpkg/dpkg.cfg.d/docker; \
     fi; \
     apt-get install -y --no-install-recommends \
-        adduser \
         ca-certificates \
         gosu \
         locales \
